@@ -1,11 +1,11 @@
-# 🎓 PlacementOS (Campus Placement Management System)
+# 🎓 GradPlacifyr (Campus Placement Management System)
 
-> A comprehensive, SDE-2 level full-stack web application designed to streamline the campus placement process for Students, Training & Placement Officers (TPOs), and Company Recruiters.
+> A comprehensive, full-stack web application designed to streamline the campus placement process for Students, Training & Placement Officers (TPOs), and Company Recruiters.
 
 ---
 
 ## 📖 Description
-PlacementOS is a centralized portal that bridges the gap between university administration, students, and hiring companies. It moves beyond a simple CRUD job board by integrating AI-driven profile building, an internal assessment engine with anti-cheating mechanisms, and robust role-based access control to ensure a transparent, fair, and efficient hiring drive.
+GradPlacifyr is a centralized portal that bridges the gap between university administration, students, and hiring companies. It moves beyond a simple CRUD job board by integrating AI-driven profile building, an internal assessment engine with anti-cheating mechanisms, and robust role-based access control to ensure a transparent, fair, and efficient hiring drive.
 
 ## ❗ Problem Statement
 The traditional college placement process is often fragmented, relying on spreadsheets, scattered emails, and manual tracking. 
@@ -13,7 +13,7 @@ The traditional college placement process is often fragmented, relying on spread
 * **For Colleges (TPOs):** Manual verification of student data, inability to seamlessly track off-campus offers, and lack of internal ranking to identify students needing help.
 * **For Companies:** Sorting through unstandardized resumes and managing interview shortlists without a unified dashboard.
 
-**PlacementOS solves this** by providing dedicated portals for each role, automating resume data extraction, and enforcing standardized communication.
+**GradPlacifyr solves this** by providing dedicated portals for each role, automating resume data extraction, and enforcing standardized communication.
 
 ---
 
