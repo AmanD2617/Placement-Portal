@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useAuth, type Role } from '../../context/AuthContext'
 import { getMyProfile, type StudentProfile } from '../../api/profile'
+import { resolveFileUrl } from '../../config'
 import jimsLogo from '../../assets/jims-logo.png'
 import './PortalLayout.css'
 
@@ -25,6 +26,7 @@ const navByRole: Record<Role, NavItem[]> = {
     { label: 'Create JNF / TNF', to: '/company/post-job' },
     { label: 'Manage Openings', to: '/company/manage-jobs' },
     { label: 'View Applicants', to: '/company/applicants' },
+    { label: 'Interview Rounds', to: '/company/rounds' },
     { label: 'Shortlist Candidates', to: '/company/shortlist' },
     { label: 'Upload Final Results', to: '/company/upload-results' },
   ],
@@ -104,8 +106,6 @@ const CompletionRing = ({ percent, size = 44 }: { percent: number; size?: number
     </svg>
   )
 }
-
-const API_ORIGIN = 'http://localhost:3000'
 
 const PortalLayout = () => {
   const { user, logout } = useAuth()
@@ -227,7 +227,7 @@ const PortalLayout = () => {
                 <CompletionRing percent={completion} size={44} />
                 {user?.profileImage ? (
                   <img
-                    src={`${API_ORIGIN}${user.profileImage}`}
+                    src={resolveFileUrl(user.profileImage) || ''}
                     alt={user.name}
                     className="portal-avatar-img"
                   />

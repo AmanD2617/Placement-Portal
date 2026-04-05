@@ -5,9 +5,8 @@ import { uploadAvatar, deleteAvatar } from '../../api/upload'
 import { useAuth } from '../../context/AuthContext'
 import type { StudentProject } from '../../api/profile'
 import { Pencil, X, Save, Sparkles, Github, Linkedin, Globe, Camera, Trash2, Plus, ExternalLink, FolderGit2 } from 'lucide-react'
+import { resolveFileUrl } from '../../config'
 import './StudentProfile.css'
-
-const API_ORIGIN = 'http://localhost:3000'
 
 const emptyProfile: Profile = {
   tenthPercentage: null,
@@ -180,7 +179,7 @@ const StudentProfile = () => {
   }
 
   const currentImageUrl = imagePreview
-    || (user?.profileImage ? `${API_ORIGIN}${user.profileImage}` : null)
+    || resolveFileUrl(user?.profileImage)
 
   const initials = (() => {
     if (!user?.name) return '?'

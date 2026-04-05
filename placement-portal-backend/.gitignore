@@ -28,3 +28,10 @@ node_modules/
 .env
 dist/
 build/
+
+# User-uploaded files (stored locally, referenced in DB)
+# These should NOT be committed — they are user data, not source code.
+uploads/avatars/*
+uploads/resumes/*
+!uploads/avatars/.gitkeep
+!uploads/resumes/.gitkeep

@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
 import prisma from '../db/prisma.js'
 import { AppError } from '../utils/appError.js'
+import { validateRegistration } from '../utils/validators.js'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret'
 const RESET_TOKEN_TTL_MS = 60 * 60 * 1000
@@ -52,34 +53,46 @@ function buildUserPayload(user) {
 
 // ═══════════ REGISTRATION ═══════════
 
-export async function registerUser({ email, password, role, name, phone }) {
-  if (!email || !password || !role) {
-    throw new AppError('Email, password and role required', 400, 'VALIDATION_ERROR')
+export async function registerUser({ email, password, role, name, phone, enrollmentNumber }) {
+  // Strict server-side validation
+  const validationError = validateRegistration({ email, password, role, name, phone, enrollmentNumber })
+  if (validationError) {
+    throw new AppError(validationError, 400, 'VALIDATION_ERROR')
   }
 
-  // Validate phone for students
-  if (phone && !/^\d{10}$/.test(phone.replace(/\D/g, ''))) {
-    throw new AppError('Phone number must be 10 digits', 400, 'VALIDATION_ERROR')
-  }
+  const normalizedEmail = email.trim().toLowerCase()
+  const cleanPhone = phone.replace(/\D/g, '')
 
   // Check for duplicate email
-  const existing = await prisma.user.findUnique({ where: { email }, select: { id: true } })
+  const existing = await prisma.user.findUnique({ where: { email: normalizedEmail }, select: { id: true } })
   if (existing) {
     throw new AppError('An account with this email already exists', 409, 'DUPLICATE_EMAIL')
+  }
+
+  // Check for duplicate enrollment number (students)
+  if (role === 'student' && enrollmentNumber) {
+    const existingEnrollment = await prisma.user.findUnique({
+      where: { enrollment_number: enrollmentNumber.trim().toUpperCase() },
+      select: { id: true },
+    })
+    if (existingEnrollment) {
+      throw new AppError('This enrollment number is already registered', 409, 'DUPLICATE_ENROLLMENT')
+    }
   }
 
   // Company/Recruiter accounts start as "pending" — need admin approval
   const status = role === 'recruiter' ? 'pending' : 'active'
 
-  const hash = await bcrypt.hash(password, 10)
+  const hash = await bcrypt.hash(password, 12)
 
   const created = await prisma.user.create({
     data: {
-      email,
+      email: normalizedEmail,
       password_hash: hash,
       role,
-      name: name || email.split('@')[0],
-      phone: phone || null,
+      name: name.trim(),
+      phone: cleanPhone,
+      enrollment_number: role === 'student' ? enrollmentNumber.trim().toUpperCase() : null,
       status,
     },
     select: { id: true },
@@ -95,11 +108,11 @@ export async function registerUser({ email, password, role, name, phone }) {
 
   const user = {
     id: created.id,
-    email,
+    email: normalizedEmail,
     role,
-    name: name || email.split('@')[0],
+    name: name.trim(),
     profile_image: null,
-    phone: phone || null,
+    phone: cleanPhone,
     status,
   }
 

@@ -1,0 +1,369 @@
+/* ═══════════ APPLICANT PROFILE MODAL ═══════════ */
+
+.apm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  padding: 1rem;
+  animation: apm-fade-in 0.2s ease;
+}
+
+@keyframes apm-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.apm-modal {
+  background: #fff;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 680px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: apm-slide-up 0.25s ease;
+}
+
+@keyframes apm-slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.apm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  border-radius: 1rem 1rem 0 0;
+  z-index: 1;
+}
+
+.apm-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.apm-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+.apm-avatar-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--jims-maroon, #6b1d2a) 0%, var(--jims-gold, #c9a84c) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.apm-header-info h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--jims-ink, #102441);
+}
+
+.apm-header-info p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--jims-ink-soft, #5f6b7a);
+}
+
+.apm-close-btn {
+  background: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.35rem;
+  cursor: pointer;
+  color: var(--jims-ink-soft, #5f6b7a);
+  display: flex;
+  align-items: center;
+  transition: all 0.15s;
+}
+
+.apm-close-btn:hover {
+  background: #f3f4f6;
+  color: #111;
+}
+
+/* ── Body ── */
+
+.apm-body {
+  padding: 1.25rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* ── Contact Row ── */
+
+.apm-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.apm-contact-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  color: var(--jims-ink-soft, #5f6b7a);
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+}
+
+.apm-contact-chip svg {
+  flex-shrink: 0;
+}
+
+/* ── Sections ── */
+
+.apm-section {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.apm-section-title {
+  margin: 0;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--jims-maroon-dark, #4a0e1b);
+  background: #fdf8f0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.apm-section-body {
+  padding: 0.75rem 0.9rem;
+}
+
+/* ── Info Grid ── */
+
+.apm-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.6rem;
+}
+
+.apm-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.apm-info-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--jims-ink-soft, #5f6b7a);
+  font-weight: 600;
+}
+
+.apm-info-value {
+  font-size: 0.88rem;
+  color: var(--jims-ink, #102441);
+  font-weight: 500;
+}
+
+.apm-info-empty {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* ── Skills Tags ── */
+
+.apm-skills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.apm-skills-row:last-child {
+  margin-bottom: 0;
+}
+
+.apm-skill-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--jims-ink-soft, #5f6b7a);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.15rem;
+  display: block;
+}
+
+.apm-skill-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  background: #eef2ff;
+  color: #3730a3;
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  font-weight: 500;
+}
+
+/* ── Projects ── */
+
+.apm-project-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.6rem;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.apm-project-card:last-child {
+  margin-bottom: 0;
+}
+
+.apm-project-title {
+  margin: 0 0 0.2rem;
+  font-size: 0.9rem;
+  color: var(--jims-ink, #102441);
+  font-weight: 600;
+}
+
+.apm-project-desc {
+  margin: 0 0 0.3rem;
+  font-size: 0.82rem;
+  color: var(--jims-ink-soft, #5f6b7a);
+  line-height: 1.4;
+}
+
+.apm-project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.3rem;
+}
+
+.apm-project-tech-tag {
+  font-size: 0.72rem;
+  background: #f0fdf4;
+  color: #166534;
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+}
+
+.apm-project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.78rem;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.apm-project-link:hover {
+  text-decoration: underline;
+}
+
+/* ── Text Block ── */
+
+.apm-text-block {
+  font-size: 0.85rem;
+  color: var(--jims-ink, #102441);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* ── Links ── */
+
+.apm-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.apm-ext-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  color: #2563eb;
+  text-decoration: none;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid #dbeafe;
+  border-radius: 999px;
+  background: #eff6ff;
+  transition: all 0.15s;
+}
+
+.apm-ext-link:hover {
+  background: #dbeafe;
+}
+
+/* ── Footer Actions ── */
+
+.apm-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid #e5e7eb;
+  background: #fafbfc;
+  border-radius: 0 0 1rem 1rem;
+  position: sticky;
+  bottom: 0;
+}
+
+.apm-resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.9rem;
+  border: none;
+  border-radius: 0.55rem;
+  background: var(--jims-maroon, #6b1d2a);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.apm-resume-btn:hover {
+  background: var(--jims-maroon-dark, #4a0e1b);
+}
+
+.apm-no-profile {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--jims-ink-soft, #5f6b7a);
+}
+
+.apm-no-profile p {
+  margin: 0.3rem 0 0;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 640px) {
+  .apm-modal {
+    max-height: 92vh;
+  }
+  .apm-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

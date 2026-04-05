@@ -26,6 +26,7 @@ import CompanyManageJobsPage from './pages/company/CompanyManageJobsPage'
 import CompanyApplicantsPage from './pages/company/CompanyApplicantsPage'
 import CompanyShortlistPage from './pages/company/CompanyShortlistPage'
 import CompanyUploadResultsPage from './pages/company/CompanyUploadResultsPage'
+import CompanyRoundsPage from './pages/company/CompanyRoundsPage'
 import TpoApproveJobsPage from './pages/tpo/TpoApproveJobsPage'
 import TpoMonitorApplicationsPage from './pages/tpo/TpoMonitorApplicationsPage'
 import TpoReportsPage from './pages/tpo/TpoReportsPage'
@@ -104,6 +105,7 @@ function App() {
               <Route path="/company/manage-jobs" element={<CompanyManageJobsPage />} />
               <Route path="/company/applicants" element={<CompanyApplicantsPage />} />
               <Route path="/company/shortlist" element={<CompanyShortlistPage />} />
+              <Route path="/company/rounds" element={<CompanyRoundsPage />} />
               <Route path="/company/upload-results" element={<CompanyUploadResultsPage />} />
               <Route path="/company/change-password" element={<RecruiterChangePassword />} />
 

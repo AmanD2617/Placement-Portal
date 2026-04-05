@@ -70,7 +70,7 @@ const StudentDashboardHome = () => {
         const raw = err instanceof Error ? err.message : 'Failed to load dashboard data'
         const friendly =
           raw === 'Failed to fetch'
-            ? 'Cannot reach placement API. Please check that the backend server is running on http://localhost:3000.'
+            ? 'Cannot reach the placement API. Please check that the backend server is running.'
             : raw
         setError(friendly)
       })

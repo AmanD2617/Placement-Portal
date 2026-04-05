@@ -1,4 +1,6 @@
-import { Prisma } from '@prisma/client'
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
+const { Prisma } = require('@prisma/client')
 import { AppError } from '../utils/appError.js'
 
 export function notFoundHandler(req, res, next) {

@@ -9,9 +9,8 @@ import {
   type ResumeInfo,
 } from '../../api/resume'
 import { FileText, Upload, Trash2, ExternalLink, CheckCircle2 } from 'lucide-react'
+import { resolveFileUrl } from '../../config'
 import '../shared/WorkPages.css'
-
-const API_ORIGIN = 'http://localhost:3000'
 
 const StudentUploadResumePage = () => {
   const [fileName, setFileName] = useState<string | null>(null)
@@ -241,7 +240,7 @@ const StudentUploadResumePage = () => {
             </div>
             <div className="resume-status-actions">
               <a
-                href={`${API_ORIGIN}${currentResume.resumeUrl}`}
+                href={resolveFileUrl(currentResume.resumeUrl) || '#'}
                 target="_blank"
                 rel="noreferrer"
                 className="work-btn secondary resume-view-btn"

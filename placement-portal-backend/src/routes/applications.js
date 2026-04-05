@@ -146,24 +146,79 @@ router.get(
             select: { title: true, company: true },
           },
           student: {
-            select: { name: true, email: true },
+            select: {
+              name: true,
+              email: true,
+              phone: true,
+              enrollment_number: true,
+              profile_image: true,
+              profile: {
+                select: {
+                  tenth_percentage: true,
+                  twelfth_percentage: true,
+                  backlogs: true,
+                  graduation_year: true,
+                  programming_languages: true,
+                  frameworks: true,
+                  tools: true,
+                  certifications: true,
+                  projects_json: true,
+                  internship_experience: true,
+                  achievements: true,
+                  github_url: true,
+                  linkedin_url: true,
+                  portfolio_url: true,
+                  resume_url: true,
+                  resume_original_name: true,
+                },
+              },
+            },
           },
         },
         orderBy: { applied_at: 'desc' },
       })
 
-      // Shape response to match original API contract
-      const result = rows.map((r) => ({
-        id: r.id,
-        jobId: r.job_id,
-        studentId: r.student_id,
-        status: r.status,
-        appliedAt: r.applied_at,
-        jobTitle: r.job.title,
-        company: r.job.company,
-        studentName: r.student.name,
-        studentEmail: r.student.email,
-      }))
+      // Shape response — include full student profile for admin/recruiter
+      const result = rows.map((r) => {
+        const p = r.student.profile
+        let projects = []
+        if (p?.projects_json) {
+          try { projects = JSON.parse(p.projects_json) } catch { /* ignore */ }
+        }
+
+        return {
+          id: r.id,
+          jobId: r.job_id,
+          studentId: r.student_id,
+          status: r.status,
+          appliedAt: r.applied_at,
+          jobTitle: r.job.title,
+          company: r.job.company,
+          studentName: r.student.name,
+          studentEmail: r.student.email,
+          studentPhone: r.student.phone,
+          enrollmentNumber: r.student.enrollment_number,
+          profileImage: r.student.profile_image,
+          profile: p ? {
+            tenthPercentage: p.tenth_percentage,
+            twelfthPercentage: p.twelfth_percentage,
+            backlogs: p.backlogs,
+            graduationYear: p.graduation_year,
+            programmingLanguages: p.programming_languages,
+            frameworks: p.frameworks,
+            tools: p.tools,
+            certifications: p.certifications,
+            projects,
+            internshipExperience: p.internship_experience,
+            achievements: p.achievements,
+            githubUrl: p.github_url,
+            linkedinUrl: p.linkedin_url,
+            portfolioUrl: p.portfolio_url,
+            resumeUrl: p.resume_url,
+            resumeOriginalName: p.resume_original_name,
+          } : null,
+        }
+      })
 
       res.json(result)
     } catch (err) {

@@ -45,11 +45,12 @@ export async function register(
   password: string,
   role: Role,
   name?: string,
-  phone?: string
+  phone?: string,
+  enrollmentNumber?: string
 ): Promise<RegisterResponse> {
   return apiFetch<RegisterResponse>('/auth/register', {
     method: 'POST',
-    body: JSON.stringify({ email, password, role, name, phone }),
+    body: JSON.stringify({ email, password, role, name, phone, enrollmentNumber }),
   })
 }
 

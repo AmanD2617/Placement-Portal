@@ -1,0 +1,242 @@
+/* ═══════════ INTERVIEW TIMELINE ═══════════ */
+
+.itl-app-card {
+  overflow: hidden;
+}
+
+/* ── App Header (clickable accordion) ── */
+
+.itl-app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.itl-app-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.itl-app-icon {
+  color: var(--jims-maroon, #6b1d2a);
+  flex-shrink: 0;
+}
+
+.itl-app-title {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--jims-ink, #102441);
+}
+
+.itl-app-company {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--jims-ink-soft, #5f6b7a);
+}
+
+.itl-app-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--jims-ink-soft, #5f6b7a);
+  flex-shrink: 0;
+}
+
+/* ── Status Badge ── */
+
+.itl-app-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+}
+
+.itl-app-badge[data-status='active'] {
+  color: #d97706;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+}
+
+.itl-app-badge[data-status='selected'] {
+  color: #16a34a;
+  background: #dcfce7;
+  border: 1px solid #86efac;
+}
+
+.itl-app-badge[data-status='rejected'] {
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+/* ═══════════ TIMELINE STEPPER ═══════════ */
+
+.itl-timeline {
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Each step */
+.itl-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  position: relative;
+  padding-bottom: 1.25rem;
+}
+
+.itl-step:last-child {
+  padding-bottom: 0;
+}
+
+/* Connector line between steps */
+.itl-connector {
+  position: absolute;
+  left: 13px; /* center of 28px icon area */
+  top: 28px;
+  bottom: 0;
+  width: 2px;
+  background: #e5e7eb;
+}
+
+.itl-step--cleared .itl-connector {
+  background: #86efac;
+}
+
+.itl-step--current .itl-connector {
+  background: #fde68a;
+}
+
+.itl-step--rejected .itl-connector {
+  background: #fecaca;
+}
+
+/* ── Step Icon ── */
+
+.itl-step-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.itl-step--cleared .itl-step-icon {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.itl-step--current .itl-step-icon {
+  background: #fef3c7;
+  color: #d97706;
+  animation: itl-pulse 2s infinite;
+}
+
+.itl-step--rejected .itl-step-icon {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.itl-step--locked .itl-step-icon {
+  background: #f3f4f6;
+  color: #9ca3af;
+}
+
+@keyframes itl-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(217, 119, 6, 0); }
+}
+
+/* ── Step Content ── */
+
+.itl-step-content {
+  flex: 1;
+  min-width: 0;
+  padding-top: 0.15rem;
+}
+
+.itl-step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.itl-step-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--jims-ink, #102441);
+}
+
+.itl-step--locked .itl-step-title {
+  color: #9ca3af;
+}
+
+.itl-step-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.itl-step--cleared .itl-step-status {
+  color: #16a34a;
+}
+
+.itl-step--current .itl-step-status {
+  color: #d97706;
+}
+
+.itl-step--rejected .itl-step-status {
+  color: #dc2626;
+}
+
+.itl-step--locked .itl-step-status {
+  color: #9ca3af;
+}
+
+/* ── Step Meta ── */
+
+.itl-step-meta {
+  margin-top: 0.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.itl-step-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--jims-ink-soft, #5f6b7a);
+}
+
+.itl-step-desc {
+  font-size: 0.78rem;
+  color: var(--jims-ink-soft, #5f6b7a);
+}
+
+/* ═══════════ RESPONSIVE ═══════════ */
+
+@media (max-width: 640px) {
+  .itl-app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .itl-app-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

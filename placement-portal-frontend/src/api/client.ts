@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3000/api'
+import { API_BASE } from '../config'
 
 export async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const token = localStorage.getItem('placement_token')

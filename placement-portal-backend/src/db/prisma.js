@@ -1,6 +1,8 @@
 import 'dotenv/config'
-import { PrismaClient } from '@prisma/client'
-import { PrismaPg } from '@prisma/adapter-pg'
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
+const { PrismaClient } = require('@prisma/client')
+const { PrismaPg } = require('@prisma/adapter-pg')
 
 // Singleton pattern — one PrismaClient instance shared across the app.
 // In dev the module can be hot-reloaded; re-creating the client every time

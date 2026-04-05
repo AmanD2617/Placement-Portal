@@ -12,6 +12,7 @@ import profileRoutes from './routes/profile.js'
 import studentRoutes from './routes/student.js'
 import eventsRoutes from './routes/events.js'
 import uploadRoutes from './routes/upload.js'
+import roundsRoutes from './routes/rounds.js'
 import { notFoundHandler, errorHandler } from './middleware/errorHandler.js'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -35,6 +36,7 @@ app.use('/api/profile', profileRoutes)
 app.use('/api/student', studentRoutes)
 app.use('/api/events', eventsRoutes)
 app.use('/api/upload', uploadRoutes)
+app.use('/api/rounds', roundsRoutes)
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, message: 'Placement Portal API' })

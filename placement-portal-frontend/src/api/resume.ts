@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3000/api'
+import { API_BASE } from '../config'
 
 export interface ParsedResumeProfile {
   programmingLanguages: string[]

@@ -9,6 +9,33 @@ export interface StudentApplication {
   company: string
 }
 
+export interface ApplicantProject {
+  title: string
+  description?: string
+  techStack?: string
+  link?: string
+  githubLink?: string
+}
+
+export interface ApplicantProfile {
+  tenthPercentage: number | null
+  twelfthPercentage: number | null
+  backlogs: number | null
+  graduationYear: number | null
+  programmingLanguages: string | null
+  frameworks: string | null
+  tools: string | null
+  certifications: string | null
+  projects: ApplicantProject[]
+  internshipExperience: string | null
+  achievements: string | null
+  githubUrl: string | null
+  linkedinUrl: string | null
+  portfolioUrl: string | null
+  resumeUrl: string | null
+  resumeOriginalName: string | null
+}
+
 export interface PortalApplication {
   id: number
   jobId: number
@@ -19,6 +46,10 @@ export interface PortalApplication {
   company: string
   studentName: string
   studentEmail: string
+  studentPhone?: string
+  enrollmentNumber?: string
+  profileImage?: string
+  profile?: ApplicantProfile | null
 }
 
 export interface CreateApplicationResponse {
